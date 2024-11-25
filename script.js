@@ -276,7 +276,7 @@ people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'K
 
 countries.push(new Country('rgb(250 170 50 / 100%)','Frisia', findPerson('rule', 'Frisia')));
 
-provinces.push(new Province(findCountry("Frisia"),"Picardy",[],false,[]));
+provinces.push(new Province(findCountry("Frisia"),"Picardy",[[96,74],[95,77],[103,77]],false,[]));
 
 function update() {
   cvs.width = (window.innerWidth-17);
