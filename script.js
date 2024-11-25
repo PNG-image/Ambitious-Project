@@ -270,14 +270,13 @@ people.push(new Human(22,86,103,'Charles',92,'catholic','French','West Francia',
 
 countries.push(new Country('rgb(70 90 130 / 100%)','West Francia', findPerson('rule', 'West Francia')));
 
-provinces.push(new Province(findCountry("West Francia"),"Normandy",[[79,87],[80,84],[79,77],[81,77],[88,79],[88,77],[91,76],[91,80],[87,81],[83,83]],false,[]));
-
-provinces.push(new Province(findCountry("West Francia"),"Picardy",[[91,76],[91,80],[97,75]]));
+provinces.push(new Province(findCountry("West Francia"),"Normandy",[[79,87],[80,84],[79,77],[81,77],[88,79],[88,77],[91,76],[95,74],[91,80],[87,81],[83,83]],false,[]));
 
 people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'King','Frisia'));
 
 countries.push(new Country('rgb(250 170 50 / 100%)','Frisia', findPerson('rule', 'Frisia')));
 
+//provinces.push(new Province(findCountry("Frisia"),"Picardy",[],false,[]));
 
 function update() {
   cvs.width = (window.innerWidth-17);
