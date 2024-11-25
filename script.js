@@ -276,7 +276,11 @@ people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'K
 
 countries.push(new Country('rgb(250 170 50 / 100%)','Frisia', findPerson('rule', 'Frisia')));
 
-provinces.push(new Province(findCountry("Frisia"),"Picardy",[[96,74],[95,77],[103,77]],false,[]));
+provinces.push(new Province(findCountry("Frisia"),"Picardy",[[96,74],[95,77],[103,77],[110,75],[101,69],[96,70]],false,[]));
+
+provinces.push(new Province(findCountry("Frisia"),"Flanders",[[110,75],[101,69],[104,67],[112,66],[117,69],[112,72]],false,[]));
+
+provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[112,78],[116,78]],false,[]));
 
 function update() {
   cvs.width = (window.innerWidth-17);
