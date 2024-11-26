@@ -280,7 +280,7 @@ provinces.push(new Province(findCountry("Frisia"),"Picardy",[[96,74],[95,77],[10
 
 provinces.push(new Province(findCountry("Frisia"),"Flanders",[[110,75],[101,69],[104,67],[112,66],[117,69],[112,72]],false,[]));
 
-provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[112,78],[116,78]],false,[]));
+provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[116,78],[119,76],[117,75],[119,73]],false,[]));
 
 function update() {
   cvs.width = (window.innerWidth-17);
