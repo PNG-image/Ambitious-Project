@@ -270,7 +270,11 @@ people.push(new Human(22,86,103,'Charles',92,'catholic','French','West Francia',
 
 countries.push(new Country('rgb(70 90 130 / 100%)','West Francia', findPerson('rule', 'West Francia')));
 
-provinces.push(new Province(findCountry("West Francia"),"Normandy",[[79,87],[80,84],[79,77],[81,77],[88,79],[88,77],[91,76],[96,74],[95,77],[91,80],[87,81],[83,83]],false,['Caen']));
+provinces.push(new Province(findCountry("West Francia"),"Dutchy of Normandy",[[79,87],[80,84],[79,77],[81,77],[88,79],[88,77],[91,76],[96,74],[95,77],[91,80],[87,81],[83,83]],false,['Caen']));
+
+provinces.push(new Province(findCountry("West Francia"),"Dutchy of Anjou",[[91,80],[87,81],[83,83],[79,87],[84,91],[88,92],[94,86]],false,[]))
+
+provinces.push(new Province(findCountry("West Francia"),"Île de France",[[95,77],[91,80],[94,86],[100,85],[104,83],[103,77]],true,['Paris']))
 
 people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'King','Frisia'));
 
@@ -281,6 +285,8 @@ provinces.push(new Province(findCountry("Frisia"),"Picardy",[[96,74],[95,77],[10
 provinces.push(new Province(findCountry("Frisia"),"Flanders",[[110,75],[101,69],[104,67],[112,66],[117,69],[112,72]],false,[]));
 
 provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[116,78],[119,76],[117,75],[119,73]],false,[]));
+
+provinces.push(new Province(findCountry("Frisia"),"Netherlands",[[104,67],[112,66],[117,69],[118,66],[117,64],[121,64],[123,61],[121,59],[122,59],[123,56],[121,55],[116,55],[114,56],[114,58],[115,58],[116,61],[112,62],[114,58],[111,58],[110,62]],true,['Utrecht']));
 
 function update() {
   cvs.width = (window.innerWidth-17);
