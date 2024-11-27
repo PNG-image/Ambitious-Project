@@ -278,7 +278,11 @@ provinces.push(new Province(findCountry("West Francia"),"Île de France",[[95,77
 
 provinces.push(new Province(findCountry("West Francia"),"Dutchy of Poitou",[[77,90],[79,87],[84,91],[88,92],[91,97],[86,101],[83,100],[84,98],[79,96]],false,[]))
 
-provinces.push(new Province(findCountry("West Francia"),"Dutchy of Aquitaine",[[91,97],[86,101],[83,100],[81,107]],false,[]))
+provinces.push(new Province(findCountry("West Francia"),"Dutchy of Aquitaine",[[91,97],[86,101],[83,100],[81,107],[87,109],[92,105]],false,[]))
+
+provinces.push(new Province(findCountry("West Francia"),"Dutchy of Gascogne",[[81,107],[87,109],[89,112],[89,118],[81,116],[80,115]],false,[]))
+
+provinces.push(new Province(findCountry("West Francia"),"Dutchy of Toulouse",[[92,105],[87,109],[89,112],[89,118],[92,117],[95,120],[102,120],[102,116],[97,108]],false,[]))
 
 people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'King','Frisia'));
 
