@@ -295,6 +295,12 @@ function newRun() {
   provinces.push(new Province(findCountry("West Francia"),"Dutchy of Gascogne",[[81,107],[87,109],[89,112],[89,118],[81,116],[80,115]],false,[]))
   
   provinces.push(new Province(findCountry("West Francia"),"Dutchy of Toulouse",[[92,105],[87,109],[89,112],[89,118],[92,117],[95,120],[102,120],[102,116],[97,108]],false,[]))
+
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Auvergne",[[102,116],[97,108],[101,101],[106,103],[108,110],[108,113],[106,113]],false,[]))
+
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Bourbon",[[97,108],[101,101],[97,98],[91,97],[92,105]],false,[]))
+
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Maine",[[97,98],[91,97],[88,92],[94,86],[100,85],[101,88],[97,90],[98,94]],false,[]))
   
   people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'King','Frisia'));
   
@@ -307,6 +313,7 @@ function newRun() {
   provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[116,78],[119,76],[117,75],[119,73]],false,[]));
   
   provinces.push(new Province(findCountry("Frisia"),"Netherlands",[[104,67],[112,66],[117,69],[118,66],[117,64],[121,64],[123,61],[121,59],[122,59],[123,56],[121,55],[116,55],[114,56],[114,58],[115,58],[116,61],[112,62],[114,58],[111,58],[110,62]],true,['Utrecht']));
+  
   try {deSel();} catch {}
 }
 function update() {
