@@ -52,6 +52,17 @@ function newCity(i) {
   } else {
     alert('Max Cities Reached on Province ' + provinces[i].name)
   }
+  document.getElementById('selected').innerHTML = provinces[i].name;
+  if (provinces[i].capital) {
+    document.getElementById('selected').innerHTML += ' (Capital)';
+  }
+  document.getElementById('selected').innerHTML += '<br>' + `<span style='color: ${provinces[i].country.color};'>${provinces[i].country.name}</span>`;
+  for (let j = 0; j < provinces[i].cities.length; j++) {
+    document.getElementById('selected').innerHTML += '<br> - ' + provinces[i].cities[j];
+  }
+  document.getElementById('selected').innerHTML += `<br><button onClick="newCity(${i})">Add City</button>`;
+  prev_i = i
+  pName = NaN;
 }
 
 function InputMousePos(event) {
@@ -223,79 +234,81 @@ function findCountry(name) {
   return a;
 }
 
-people.push(new Human(14, 52, 108, 'Drest IX', 72, 'Catholic', 'Scottish', 'Scotland', [], 'King', 'Scotland'));
-
-countries.push(new Country('rgb(50 50 150 / 100%)','Scotland', findPerson('rule', 'Scotland'))); //75%
-
-provinces.push(new Province(findCountry("Scotland"),"Sutherland",[[77,30],[68,28],[72,24],[64,24],[60,35],[62,35]],false,['Durness']));
-provinces.push(new Province(findCountry("Scotland"),"Perth",[[77,33],[77,30],[62,35],[60,42],[65,38],[74,40]],true,['Perth']));
-provinces.push(new Province(findCountry("Scotland"),"Lanark",[[65,38],[74,40],[70,45],[63,46]],false,['Edinburough','Glasgow']));
-
-people.push(new Human(15,51,86,'Aethelred I',71,'Catholic','English','England',[],'King','England'));
-
-countries.push(new Country('rgb(150 50 50 / 100%)','England', findPerson('rule', 'England'))); //75%
-
-provinces.push(new Province(findCountry("England"),"Cumberland",[[70,45],[74,40],[79,42],[80,46],[72,50],[70,49],[71,45]],false,['Newcastle']));
-provinces.push(new Province(findCountry("England"),"Yorkshire",[[80,46],[72,50],[72,55],[80,57],[89,58],[87,51]],false,['York','Lincoln']));
-provinces.push(new Province(findCountry("England"),"Essex",[[89,58],[80,57],[73,65],[82,62],[90,65],[95,63],[94,58]],false,['Bury St.Edmonds']));
-provinces.push(new Province(findCountry("England"),"London",[[73,65],[82,62],[90,65],[90,66],[72,67]],true,['London']));
-provinces.push(new Province(findCountry("England"),"Sussex",[[90,66],[72,67],[75,71],[91,70],[94,67]],false,['Canterbury']));
-
-people.push(new Human(12, 76, 24, 'Merfyn Frych', 107, 'Catholic', 'Welsh', 'Wales', [], 'King', 'Wales','the Great'));
-
-countries.push(new Country('rgb(170 135 50 / 100%)','Wales', findPerson('rule', 'Wales'))); // 75%
-
-provinces.push(new Province(findCountry("Wales"),"Wales",[[72,55],[80,57],[73,65],[64,64],[70,62],[65,56]],true,['Shrewsbury']));
-provinces.push(new Province(findCountry("Wales"),"Cornwall",[[72,67],[75,71],[65,74],[62,74],[67,69]],false,['Bristol']));
-
-people.push(new Human(18,105,67,'Lóegaire mac Néill',104,'Catholic','Irish','Ireland',[],'King','Ireland'));
-
-countries.push(new Country('rgb(50 150 50 / 100%)','Ireland', findPerson('rule', 'Ireland')));
-
-provinces.push(new Province(findCountry("Ireland"),"Ulster",[[58,44],[61,50],[58,52],[54,49],[52,50],[49,48],[52,45]], true,['Belfast']));
-
-provinces.push(new Province(findCountry("Ireland"),"Connacht",[[52,45],[49,48],[47,56],[44,56],[40,55],[39,50],[45,50],[45,48],[48,44]],true,['Galway']));
-
-provinces.push(new Province(findCountry("Ireland"),"Dublin",[[49,48],[47,56],[53,62],[57,60],[58,52],[54,49],[52,50]],true,['Dublin']));
-
-provinces.push(new Province(findCountry("Ireland"),"Munster",[[47,56],[53,62],[50,63],[41,66],[38,61],[42,60],[44,56]],true,['Cork','Limerick']));
-
-people.push(new Human(22,86,103,'Alan I',92,'Catholic','Breton','Brittany',[],'King','Brittany', 'the Great'));
-
-countries.push(new Country('rgb(170 90 130 / 100%)','Brittany', findPerson('rule', 'Brittany')));
-
-provinces.push(new Province(findCountry("Brittany"),"Brittany",[[65,84],[66,87],[77,90],[79,87],[80,84],[75,84],[73,82]],false,[]));
-
-people.push(new Human(22,86,103,'Charles',92,'catholic','French','West Francia',[],'King','West Francia', 'the Simple'));
-
-countries.push(new Country('rgb(70 90 130 / 100%)','West Francia', findPerson('rule', 'West Francia')));
-
-provinces.push(new Province(findCountry("West Francia"),"Dutchy of Normandy",[[79,87],[80,84],[79,77],[81,77],[88,79],[88,77],[91,76],[96,74],[95,77],[91,80],[87,81],[83,83]],false,['Caen']));
-
-provinces.push(new Province(findCountry("West Francia"),"Dutchy of Anjou",[[91,80],[87,81],[83,83],[79,87],[84,91],[88,92],[94,86]],false,[]))
-
-provinces.push(new Province(findCountry("West Francia"),"Île de France",[[95,77],[91,80],[94,86],[100,85],[104,83],[103,77]],true,['Paris']))
-
-provinces.push(new Province(findCountry("West Francia"),"Dutchy of Poitou",[[77,90],[79,87],[84,91],[88,92],[91,97],[86,101],[83,100],[84,98],[79,96]],false,[]))
-
-provinces.push(new Province(findCountry("West Francia"),"Dutchy of Aquitaine",[[91,97],[86,101],[83,100],[81,107],[87,109],[92,105]],false,[]))
-
-provinces.push(new Province(findCountry("West Francia"),"Dutchy of Gascogne",[[81,107],[87,109],[89,112],[89,118],[81,116],[80,115]],false,[]))
-
-provinces.push(new Province(findCountry("West Francia"),"Dutchy of Toulouse",[[92,105],[87,109],[89,112],[89,118],[92,117],[95,120],[102,120],[102,116],[97,108]],false,[]))
-
-people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'King','Frisia'));
-
-countries.push(new Country('rgb(250 170 50 / 100%)','Frisia', findPerson('rule', 'Frisia')));
-
-provinces.push(new Province(findCountry("Frisia"),"Picardy",[[96,74],[95,77],[103,77],[110,75],[101,69],[96,70]],false,[]));
-
-provinces.push(new Province(findCountry("Frisia"),"Flanders",[[110,75],[101,69],[104,67],[112,66],[117,69],[112,72]],false,[]));
-
-provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[116,78],[119,76],[117,75],[119,73]],false,[]));
-
-provinces.push(new Province(findCountry("Frisia"),"Netherlands",[[104,67],[112,66],[117,69],[118,66],[117,64],[121,64],[123,61],[121,59],[122,59],[123,56],[121,55],[116,55],[114,56],[114,58],[115,58],[116,61],[112,62],[114,58],[111,58],[110,62]],true,['Utrecht']));
-
+function newRun() {
+  people.push(new Human(14, 52, 108, 'Drest IX', 72, 'Catholic', 'Scottish', 'Scotland', [], 'King', 'Scotland'));
+  
+  countries.push(new Country('rgb(50 50 150 / 100%)','Scotland', findPerson('rule', 'Scotland'))); //75%
+  
+  provinces.push(new Province(findCountry("Scotland"),"Sutherland",[[77,30],[68,28],[72,24],[64,24],[60,35],[62,35]],false,['Durness']));
+  provinces.push(new Province(findCountry("Scotland"),"Perth",[[77,33],[77,30],[62,35],[60,42],[65,38],[74,40]],true,['Perth']));
+  provinces.push(new Province(findCountry("Scotland"),"Lanark",[[65,38],[74,40],[70,45],[63,46]],false,['Edinburough','Glasgow']));
+  
+  people.push(new Human(15,51,86,'Aethelred I',71,'Catholic','English','England',[],'King','England'));
+  
+  countries.push(new Country('rgb(150 50 50 / 100%)','England', findPerson('rule', 'England'))); //75%
+  
+  provinces.push(new Province(findCountry("England"),"Cumberland",[[70,45],[74,40],[79,42],[80,46],[72,50],[70,49],[71,45]],false,['Newcastle']));
+  provinces.push(new Province(findCountry("England"),"Yorkshire",[[80,46],[72,50],[72,55],[80,57],[89,58],[87,51]],false,['York','Lincoln']));
+  provinces.push(new Province(findCountry("England"),"Essex",[[89,58],[80,57],[73,65],[82,62],[90,65],[95,63],[94,58]],false,['Bury St.Edmonds']));
+  provinces.push(new Province(findCountry("England"),"London",[[73,65],[82,62],[90,65],[90,66],[72,67]],true,['London']));
+  provinces.push(new Province(findCountry("England"),"Sussex",[[90,66],[72,67],[75,71],[91,70],[94,67]],false,['Canterbury']));
+  
+  people.push(new Human(12, 76, 24, 'Merfyn Frych', 107, 'Catholic', 'Welsh', 'Wales', [], 'King', 'Wales','the Great'));
+  
+  countries.push(new Country('rgb(170 135 50 / 100%)','Wales', findPerson('rule', 'Wales'))); // 75%
+  
+  provinces.push(new Province(findCountry("Wales"),"Wales",[[72,55],[80,57],[73,65],[64,64],[70,62],[65,56]],true,['Shrewsbury']));
+  provinces.push(new Province(findCountry("Wales"),"Cornwall",[[72,67],[75,71],[65,74],[62,74],[67,69]],false,['Bristol']));
+  
+  people.push(new Human(18,105,67,'Lóegaire mac Néill',104,'Catholic','Irish','Ireland',[],'King','Ireland'));
+  
+  countries.push(new Country('rgb(50 150 50 / 100%)','Ireland', findPerson('rule', 'Ireland')));
+  
+  provinces.push(new Province(findCountry("Ireland"),"Ulster",[[58,44],[61,50],[58,52],[54,49],[52,50],[49,48],[52,45]], true,['Belfast']));
+  
+  provinces.push(new Province(findCountry("Ireland"),"Connacht",[[52,45],[49,48],[47,56],[44,56],[40,55],[39,50],[45,50],[45,48],[48,44]],true,['Galway']));
+  
+  provinces.push(new Province(findCountry("Ireland"),"Dublin",[[49,48],[47,56],[53,62],[57,60],[58,52],[54,49],[52,50]],true,['Dublin']));
+  
+  provinces.push(new Province(findCountry("Ireland"),"Munster",[[47,56],[53,62],[50,63],[41,66],[38,61],[42,60],[44,56]],true,['Cork','Limerick']));
+  
+  people.push(new Human(22,86,103,'Alan I',92,'Catholic','Breton','Brittany',[],'King','Brittany', 'the Great'));
+  
+  countries.push(new Country('rgb(170 90 130 / 100%)','Brittany', findPerson('rule', 'Brittany')));
+  
+  provinces.push(new Province(findCountry("Brittany"),"Brittany",[[65,84],[66,87],[77,90],[79,87],[80,84],[75,84],[73,82]],false,[]));
+  
+  people.push(new Human(22,86,103,'Charles',92,'catholic','French','West Francia',[],'King','West Francia', 'the Simple'));
+  
+  countries.push(new Country('rgb(70 90 130 / 100%)','West Francia', findPerson('rule', 'West Francia')));
+  
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Normandy",[[79,87],[80,84],[79,77],[81,77],[88,79],[88,77],[91,76],[96,74],[95,77],[91,80],[87,81],[83,83]],false,['Caen']));
+  
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Anjou",[[91,80],[87,81],[83,83],[79,87],[84,91],[88,92],[94,86]],false,[]))
+  
+  provinces.push(new Province(findCountry("West Francia"),"Île de France",[[95,77],[91,80],[94,86],[100,85],[104,83],[103,77]],true,['Paris']))
+  
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Poitou",[[77,90],[79,87],[84,91],[88,92],[91,97],[86,101],[83,100],[84,98],[79,96]],false,[]))
+  
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Aquitaine",[[91,97],[86,101],[83,100],[81,107],[87,109],[92,105]],false,[]))
+  
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Gascogne",[[81,107],[87,109],[89,112],[89,118],[81,116],[80,115]],false,[]))
+  
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Toulouse",[[92,105],[87,109],[89,112],[89,118],[92,117],[95,120],[102,120],[102,116],[97,108]],false,[]))
+  
+  people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'King','Frisia'));
+  
+  countries.push(new Country('rgb(250 170 50 / 100%)','Frisia', findPerson('rule', 'Frisia')));
+  
+  provinces.push(new Province(findCountry("Frisia"),"Picardy",[[96,74],[95,77],[103,77],[110,75],[101,69],[96,70]],false,[]));
+  
+  provinces.push(new Province(findCountry("Frisia"),"Flanders",[[110,75],[101,69],[104,67],[112,66],[117,69],[112,72]],false,[]));
+  
+  provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[116,78],[119,76],[117,75],[119,73]],false,[]));
+  
+  provinces.push(new Province(findCountry("Frisia"),"Netherlands",[[104,67],[112,66],[117,69],[118,66],[117,64],[121,64],[123,61],[121,59],[122,59],[123,56],[121,55],[116,55],[114,56],[114,58],[115,58],[116,61],[112,62],[114,58],[111,58],[110,62]],true,['Utrecht']));
+  try {deSel();} catch {}
+}
 function update() {
   cvs.width = (window.innerWidth-17);
   scale = cvs.width / 384;
@@ -330,5 +343,6 @@ function update() {
   }
 }
 
+newRun();
 setInterval(update, 250);
 
