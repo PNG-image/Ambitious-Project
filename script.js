@@ -284,23 +284,27 @@ function newRun() {
   
   provinces.push(new Province(findCountry("West Francia"),"Dutchy of Normandy",[[79,87],[80,84],[79,77],[81,77],[88,79],[88,77],[91,76],[96,74],[95,77],[91,80],[87,81],[83,83]],false,['Caen']));
   
-  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Anjou",[[91,80],[87,81],[83,83],[79,87],[84,91],[88,92],[94,86]],false,[]))
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Anjou",[[91,80],[87,81],[83,83],[79,87],[84,91],[88,92],[94,86]],false,[]));
   
-  provinces.push(new Province(findCountry("West Francia"),"Île de France",[[95,77],[91,80],[94,86],[100,85],[104,83],[103,77]],true,['Paris']))
+  provinces.push(new Province(findCountry("West Francia"),"Île de France",[[95,77],[91,80],[94,86],[100,85],[104,83],[103,77]],true,['Paris']));
   
-  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Poitou",[[77,90],[79,87],[84,91],[88,92],[91,97],[86,101],[83,100],[84,98],[79,96]],false,[]))
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Poitou",[[77,90],[79,87],[84,91],[88,92],[91,97],[86,101],[83,100],[84,98],[79,96]],false,[]));
   
-  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Aquitaine",[[91,97],[86,101],[83,100],[81,107],[87,109],[92,105]],false,[]))
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Aquitaine",[[91,97],[86,101],[83,100],[81,107],[87,109],[92,105]],false,[]));
   
-  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Gascogne",[[81,107],[87,109],[89,112],[89,118],[81,116],[80,115]],false,[]))
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Gascogne",[[81,107],[87,109],[89,112],[89,118],[81,116],[80,115]],false,[]));
   
-  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Toulouse",[[92,105],[87,109],[89,112],[89,118],[92,117],[95,120],[102,120],[102,116],[97,108]],false,[]))
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Toulouse",[[92,105],[87,109],[89,112],[89,118],[92,117],[95,120],[102,120],[102,116],[97,108]],false,[]));
 
-  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Auvergne",[[102,116],[97,108],[101,101],[106,103],[108,110],[108,113],[106,113]],false,[]))
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Auvergne",[[102,116],[97,108],[101,101],[106,103],[108,110],[108,113],[106,113]],false,[]));
 
   provinces.push(new Province(findCountry("West Francia"),"Dutchy of Bourbon",[[97,108],[101,101],[97,98],[91,97],[92,105]],false,[]))
 
-  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Maine",[[97,98],[91,97],[88,92],[94,86],[100,85],[101,88],[97,90],[98,94]],false,[]))
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Maine",[[97,98],[91,97],[88,92],[94,86],[100,85],[101,88],[97,90],[98,94]],false,[]));
+
+  provinces.push(new Province(findCountry("West Francia"),"Dutchy of Burgundy",[[100,85],[101,88],[97,90],[98,94],[97,98],[101,101],[106,103],[108,98],[111,96],[112,90],[109,86],[104,83]],false,[]));
+
+  provinces.push(new Province(findCountry("West Francia"),"Prince-Archbishopric of Champagne",[[109,86],[104,83],[103,77],[110,75],[116,78],[115,82]],false,[]));
   
   people.push(new Human(22,86,103,'Dirk I',92,'Catholic','Frisian', 'Frisia',[],'King','Frisia'));
   
@@ -313,6 +317,12 @@ function newRun() {
   provinces.push(new Province(findCountry("Frisia"),"Wallonia",[[117,69],[112,72],[110,75],[116,78],[119,76],[117,75],[119,73]],false,[]));
   
   provinces.push(new Province(findCountry("Frisia"),"Netherlands",[[104,67],[112,66],[117,69],[118,66],[117,64],[121,64],[123,61],[121,59],[122,59],[123,56],[121,55],[116,55],[114,56],[114,58],[115,58],[116,61],[112,62],[114,58],[111,58],[110,62]],true,['Utrecht']));
+
+  people.push(new Human(22,86,103,'Louis',92,'Catholic','Burgundian','Burgundy',[],'King','Burgundy','the Blind'))
+
+  countries.push(new Country('rgb(130 70 70 / 100%)','Burgundy',findPerson('rule', 'Burgundy')));
+
+  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Provence",[[108,110],[108,113],[112,114],[115,116],[118,116],[125,111],[121,109],[122,105],[114,107]],true,['Aix']))
   
   try {deSel();} catch {}
 }
