@@ -26,6 +26,15 @@ function load() {
   console.log('loaded')
 }
 
+var borders = [];
+class border {
+  constructor(mtn,type,verticies,provinces) {
+    this.mtn = mtn;   // mountain?
+    this.type = type; // l-l, l-w, w-w, land/water
+    this.provinces = provinces;
+    this.verticies = verticies;
+  }
+}
 
 const img = new Image();
 img.src = "Ref.png";
@@ -211,6 +220,15 @@ var people = [];
 var provinces = [];
 var countries = [];
 
+function compare(a,b,len) {
+  for (let i = 0; i < len; i++) {
+    if (a[i] != b[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 class Province {
   constructor(parent,name,vertexPositions,isCapital,cities) {
     parent.provinces++;
@@ -220,6 +238,33 @@ class Province {
     this.vertexPositions = vertexPositions;
     this.buildings = [];
     this.cities = cities;
+    /*
+    let selVtx = [];
+    loading = true;
+    for (let i = 0; i < provinces.length; i++) {
+      for (let j = 0; j < provinces[i].vertexPositions.length; j++) {
+        for (let k = 0; k < this.vertexPositions.length; k++) {
+          if (selVtx.length == 0) {
+            console.log('looking for first vertex')
+            if (compare(provinces[i].vertexPositions[j], this.vertexPositions[k],2)) {
+              selVtx.push(provinces[i].vertexPositions[j]);
+              console.log('pushed first vertex')
+            }
+          } else {
+            console.log('looking for second vertex')
+            if (compare(provinces[i].vertexPositions[j], this.vertexPositions[k],2)) {
+              selVtx.push(provinces[i].vertexPositions[j]);
+              borders.push(new border(false, 'l-l', selVtx, [provinces[i], this]));
+              console.log('new border!')
+            }
+            console.log('cleared selVtx')
+            selVtx = [];
+          }
+        }
+      }
+    }
+    loading = false;
+    */
   }
 }
 
@@ -234,7 +279,11 @@ function findCountry(name) {
   return a;
 }
 
+var loading = true;
+
 function newRun() {
+  loading = true;
+  
   people.push(new Human(14, 52, 108, 'Drest IX', 72, 'Catholic', 'Scottish', 'Scotland', [], 'King', 'Scotland'));
   
   countries.push(new Country('rgb(50 50 150 / 100%)','Scotland', findPerson('rule', 'Scotland'))); //75%
@@ -318,14 +367,23 @@ function newRun() {
   
   provinces.push(new Province(findCountry("Frisia"),"Netherlands",[[104,67],[112,66],[117,69],[118,66],[117,64],[121,64],[123,61],[121,59],[122,59],[123,56],[121,55],[116,55],[114,56],[114,58],[115,58],[116,61],[112,62],[114,58],[111,58],[110,62]],true,['Utrecht']));
 
-  people.push(new Human(22,86,103,'Louis',92,'Catholic','Burgundian','Burgundy',[],'King','Burgundy','the Blind'))
+  people.push(new Human(22,86,103,'Louis',92,'Catholic','Burgundian','Burgundy',[],'King','Burgundy','the Blind'));
 
   countries.push(new Country('rgb(130 70 70 / 100%)','Burgundy',findPerson('rule', 'Burgundy')));
 
-  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Provence",[[108,110],[108,113],[112,114],[115,116],[118,116],[125,111],[121,109],[122,105],[114,107]],true,['Aix']))
+  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Provence",[[108,110],[108,113],[112,114],[115,116],[118,116],[125,111],[121,109],[122,105],[114,107]],true,['Aix']));
+
+  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Dauphine",[[106,103],[108,110],[114,107],[113,101],[111,96],[108,98]],false,[]));
+
+  provinces.push(new Province(findCountry("Burgundy"),"Prince-Archbishopric of Savoy",[[122,105],[114,107],[113,101],[111,96],[114,95],[117,97],[120,96],[121,100]],false,[]));
   
+  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Franche Comte",[[115,82],[109,86],[112,90],[111,96],[114,95],[116,90]],false,[]));
+
+  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Franche Comte",[[114,95],[116,90],[115,82],[119,86],[122,89],[117,97]],false,[]));
+
   try {deSel();} catch {}
 }
+
 function update() {
   cvs.width = (window.innerWidth-17);
   scale = cvs.width / 384;
