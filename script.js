@@ -28,11 +28,10 @@ function load() {
 
 var borders = [];
 class border {
-  constructor(mtn,type,verticies,provinces) {
+  constructor(mtn,type,provinces) {
     this.mtn = mtn;   // mountain?
     this.type = type; // l-l, l-w, w-w, land/water
     this.provinces = provinces;
-    this.verticies = verticies;
   }
 }
 
