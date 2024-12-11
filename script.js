@@ -43,7 +43,7 @@ function Bool() {
   bool = !bool;
 }
 var map = true;
-function Map() {
+function Mapp() {
   map = !map;
 }
 function deSel() {
@@ -229,6 +229,71 @@ function compare(a,b,len) {
 }
 
 class Province {
+
+  /** @type {Map<string, Province[]>} */
+  static #edgesProvinceMap = new Map;
+
+  #edges;
+
+  /** @param {[ x: number, y: number ][]} vertexPositions  */
+  constructor(parent,name,vertexPositions,isCapital,cities) {
+    parent.provinces++;
+    this.country = parent;
+    this.capital = isCapital;
+    this.name = name;
+    this.vertexPositions = vertexPositions;
+    this.#edges = this.#mapEdgesWithInstance();
+    this.buildings = [];
+    this.cities = cities;
+  }
+
+  get edges() {
+    return this.#edges;
+  }
+
+  #mapEdgesWithInstance() {
+    const edges = [];
+    for(let indexA = 0; indexA < this.vertexPositions.length; indexA++) {
+      const indexB = (indexA + 1) % this.vertexPositions.length;
+      const vertexIdA = Province.vertexId(this.vertexPositions[indexA]);
+      const vertexIdB = Province.vertexId(this.vertexPositions[indexB]);
+      const edgeId = Province.edgeId(vertexIdA, vertexIdB);
+      const edgeIdAlt = Province.edgeId(vertexIdB, vertexIdA);
+      //console.log(Province.#edgesProvinceMap)
+      if(Province.#edgesProvinceMap.has(edgeId)) {
+        Province.#edgesProvinceMap.get(edgeId).push(this);
+        edges.push(edgeId);
+      } else if(Province.#edgesProvinceMap.has(edgeIdAlt)) {
+        Province.#edgesProvinceMap.get(edgeIdAlt).push(this);
+        edges.push(edgeIdAlt);
+      } else {
+        Province.#edgesProvinceMap.set(edgeId, [ this ]);
+        edges.push(edgeId);
+      }
+    }
+    return edges;
+  }
+
+  getEdgeProvinces(edgeIndex) {
+    return Province.getEdgesProvinceMap().get(this.#edges[edgeIndex]);
+  }
+
+  static getEdgesProvinceMap() {
+    return this.#edgesProvinceMap;
+  }
+
+  /** @param {[ x: number, y: number ]} vertex */
+  static vertexId(vertex) {
+    return vertex[0] + "," + vertex[1];
+  }
+
+  static edgeId(vertexId1, vertexId2) {
+    return vertexId1 + ":" + vertexId2;
+  }
+}
+
+/*
+class Province {
   constructor(parent,name,vertexPositions,isCapital,cities) {
     parent.provinces++;
     this.country = parent;
@@ -263,9 +328,10 @@ class Province {
       }
     }
     loading = false;
-    */
+    * /
   }
 }
+*/
 
 function findCountry(name) {
   for (var i = 0; i < countries.length; i++) {
@@ -290,6 +356,7 @@ function newRun() {
   provinces.push(new Province(findCountry("Scotland"),"Sutherland",[[77,30],[68,28],[72,24],[64,24],[60,35],[62,35]],false,['Durness']));
   provinces.push(new Province(findCountry("Scotland"),"Perth",[[77,33],[77,30],[62,35],[60,42],[65,38],[74,40]],true,['Perth']));
   provinces.push(new Province(findCountry("Scotland"),"Lanark",[[65,38],[74,40],[70,45],[63,46]],false,['Edinburough','Glasgow']));
+  console.log(provinces[0].edges);
   
   people.push(new Human(15,51,86,'Aethelred I',71,'Catholic','English','England',[],'King','England'));
   
@@ -380,7 +447,18 @@ function newRun() {
 
   provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Franche Comte",[[114,95],[116,90],[115,82],[119,86],[122,89],[117,97]],false,[]));
 
+  provinces.push(new Province(findCountry("Burgundy"),"Corsica",[[134,126],[135,120],[134,120],[134,117],[133,119],[130,119],[131,125]],false,[]));
+  
+  people.push(new Human(22,86,103,'Louis',92,'Catholic','Lotharignian','Lotharignia',[],'King','Lotharignia','the Child'));
+
+  countries.push(new Country('rgb(100 70 50 / 100%)','Lotharignia',findPerson('rule', 'Lotharignia')));
+
+  provinces.push(new Province(findCountry("Lotharignia"),"Lorraine",[[115,82],[119,86],[122,89],[124,89],[125,84],[128,81],[124,80],[122,80],[120,78],[119,76],[116,78]],false,[]));
+
+  provinces.push(new Province(findCountry("Lotharignia"),"Rhineland",[[124,80],[122,80],[120,78],[119,76],[117,75],[119,73],[117,69],[118,66],[117,64],[121,64],[123,69],[125,76]],true,['Aachen']));
+  
   try {deSel();} catch {}
+  //console.log(Province.getEdgesProvinceMap(),100);
 }
 
 function update() {
