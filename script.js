@@ -1,9 +1,15 @@
 var cvs = document.getElementById('thisisacanvas');
+var cvs_node = document.getElementById('thisisalsoacanvas');
 var scale;
+var scale_node;
 cvs.width = (window.innerWidth-17);
+cvs_node.width = (window.innerWidth-17);
 scale = cvs.width / 384;
+scale_node = cvs.width / 384;
 cvs.height = 216*scale;
+cvs_node.height = 216*scale;
 var ctx = cvs.getContext('2d');
+var ctx_node = cvs_node.getContext('2d');
 
 
 function save() {
@@ -113,6 +119,10 @@ cvs.addEventListener("mousedown", function (event) {
           document.getElementById('selected').innerHTML += '<br> - ' + provinces[i].cities[j];
         }
         document.getElementById('selected').innerHTML += `<br><button onClick="newCity(${i})">Add City</button>`;
+        document.getElementById('selected').innerHTML += '<br>Borders:'
+        for (let neighbour of provinces[i].neighbours) {
+          document.getElementById('selected').innerHTML += '<br> - ' + neighbour;
+        }
         prev_i = i
         pName = NaN;
       } else {
@@ -157,6 +167,7 @@ function findPerson(identifier, object) {
   } else {
     return found;
   }
+  
 }
 
 
@@ -170,10 +181,15 @@ class Trait {
 }
 
 class Stats {
-  country = new Country('rgb(0,0,0 / 100%','None');
-  human = new Human(0,0,0,0,'None',0,0,0,[]);
+  country = NaN;
+  human = NaN;
 }
 
+
+/**
+ * @param {King/Duke/Prince etc.} title
+ * @param {the Great, etc.} Title
+ */
 
 class Human {
   constructor(lvl, xp, gold, name, prestiege, religion, nationality, country, traits, title, rule, Title) {
@@ -251,6 +267,24 @@ class Province {
     return this.#edges;
   }
 
+  get neighbours() {
+    let borderingProvinces = new Set();
+    for(let edge of this.edges) {
+        let edgeProvinces = Province.getEdgesProvinceMap().get(edge);
+        for(let edgeProvince of edgeProvinces) {
+            if(edgeProvince === this) {
+                continue;
+            }
+            borderingProvinces.add(edgeProvince);
+        }
+    }
+    let borderingProvinceNames = [];
+    for (let province of borderingProvinces) {
+        borderingProvinceNames.push(province.name);
+    }
+    return borderingProvinceNames
+  }
+
   #mapEdgesWithInstance() {
     const edges = [];
     for(let indexA = 0; indexA < this.vertexPositions.length; indexA++) {
@@ -291,47 +325,6 @@ class Province {
     return vertexId1 + ":" + vertexId2;
   }
 }
-
-/*
-class Province {
-  constructor(parent,name,vertexPositions,isCapital,cities) {
-    parent.provinces++;
-    this.country = parent;
-    this.capital = isCapital;
-    this.name = name;
-    this.vertexPositions = vertexPositions;
-    this.buildings = [];
-    this.cities = cities;
-    /*
-    let selVtx = [];
-    loading = true;
-    for (let i = 0; i < provinces.length; i++) {
-      for (let j = 0; j < provinces[i].vertexPositions.length; j++) {
-        for (let k = 0; k < this.vertexPositions.length; k++) {
-          if (selVtx.length == 0) {
-            console.log('looking for first vertex')
-            if (compare(provinces[i].vertexPositions[j], this.vertexPositions[k],2)) {
-              selVtx.push(provinces[i].vertexPositions[j]);
-              console.log('pushed first vertex')
-            }
-          } else {
-            console.log('looking for second vertex')
-            if (compare(provinces[i].vertexPositions[j], this.vertexPositions[k],2)) {
-              selVtx.push(provinces[i].vertexPositions[j]);
-              borders.push(new border(false, 'l-l', selVtx, [provinces[i], this]));
-              console.log('new border!')
-            }
-            console.log('cleared selVtx')
-            selVtx = [];
-          }
-        }
-      }
-    }
-    loading = false;
-    * /
-  }
-}
-*/
 
 function findCountry(name) {
   for (var i = 0; i < countries.length; i++) {
@@ -445,9 +438,17 @@ function newRun() {
   
   provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Franche Comte",[[115,82],[109,86],[112,90],[111,96],[114,95],[116,90]],false,[]));
 
-  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Franche Comte",[[114,95],[116,90],[115,82],[119,86],[122,89],[117,97]],false,[]));
+  provinces.push(new Province(findCountry("Burgundy"),"Dutchy of Transjurania",[[114,95],[116,90],[115,82],[119,86],[122,89],[117,97]],false,[]));
+  
+  provinces.push(new Province(findCountry("Burgundy"),"Bern",[[122,89],[117,97],[120,96],[123,99],[126,99],[129,96],[126,94],[124,89]],false,['Bern']));
 
   provinces.push(new Province(findCountry("Burgundy"),"Corsica",[[134,126],[135,120],[134,120],[134,117],[133,119],[130,119],[131,125]],false,[]));
+
+  people.push(new Human(22,86,103,'Louis',92,'Catholic','East Francian','East Francia',[],'King','East Francia'));
+
+  countries.push(new Country( 'rgb(150 150 150 / 100%)','East Francia', findPerson('rule', 'East Francia')));
+
+  provinces.push(new Province(findCountry('East Francia'),'Liechtenstein',[[129,96],[132,99],[133,96],[134,97],[136,97],[138,94],[135,93],[135,89],[124,89],[126,94]],false,[]));
   
   people.push(new Human(22,86,103,'Louis',92,'Catholic','Lotharignian','Lotharignia',[],'King','Lotharignia','the Child'));
 
@@ -458,7 +459,26 @@ function newRun() {
   provinces.push(new Province(findCountry("Lotharignia"),"Rhineland",[[124,80],[122,80],[120,78],[119,76],[117,75],[119,73],[117,69],[118,66],[117,64],[121,64],[123,69],[125,76]],true,['Aachen']));
   
   try {deSel();} catch {}
-  //console.log(Province.getEdgesProvinceMap(),100);
+
+  document.getElementById('stats').innerHTML = '';
+
+  Stats.country = NaN;
+  Stats.human = NaN;
+  
+  document.getElementById('formSlot').innerHTML = "double click on country to select. click submit afterward <button onClick='selectCountry()'>Submit</button>";
+
+  
+}
+
+
+function selectCountry() {
+  console.log(typeof pName)
+  if (typeof pName != "number") {
+    Stats.country = findCountry(pName);
+    Stats.human = Stats.country.ruler;
+    document.getElementById('formSlot').innerHTML = "";
+  }
+  
 }
 
 function update() {
@@ -493,8 +513,26 @@ function update() {
       ctx.fill();
     }
   }
+
+  //stats update
+  try {
+    if (typeof Stats.country != "number" && typeof Stats.human != "number") {
+      document.getElementById('stats').innerHTML = Stats.human.name + ' ' + Stats.human.Title + ', ' + Stats.human.title + ' of ' + Stats.human.rule;
+    }
+  } catch {}
 }
+
+
+function renderNodes() {
+  cvs_node.width = (window.innerWidth-17);
+  scale_node = cvs_node.width / 384;
+  cvs_node.height = 216*scale_node;
+  ctx_node.fillStyle = 'rgb(100 100 100)';
+  ctx_node.fillRect(0, 0, cvs_node.width, cvs_node.height);
+}
+
 
 newRun();
 setInterval(update, 250);
+setInterval(renderNodes, 250);
 
