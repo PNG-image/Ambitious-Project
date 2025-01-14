@@ -443,12 +443,6 @@ function newRun() {
   provinces.push(new Province(findCountry("Burgundy"),"Bern",[[122,89],[117,97],[120,96],[123,99],[126,99],[129,96],[126,94],[124,89]],false,['Bern']));
 
   provinces.push(new Province(findCountry("Burgundy"),"Corsica",[[134,126],[135,120],[134,120],[134,117],[133,119],[130,119],[131,125]],false,[]));
-
-  people.push(new Human(22,86,103,'Louis',92,'Catholic','East Francian','East Francia',[],'King','East Francia'));
-
-  countries.push(new Country( 'rgb(150 150 150 / 100%)','East Francia', findPerson('rule', 'East Francia')));
-
-  provinces.push(new Province(findCountry('East Francia'),'Liechtenstein',[[129,96],[132,99],[133,96],[134,97],[136,97],[138,94],[135,93],[135,89],[124,89],[126,94]],false,[]));
   
   people.push(new Human(22,86,103,'Louis',92,'Catholic','Lotharignian','Lotharignia',[],'King','Lotharignia','the Child'));
 
@@ -457,6 +451,14 @@ function newRun() {
   provinces.push(new Province(findCountry("Lotharignia"),"Lorraine",[[115,82],[119,86],[122,89],[124,89],[125,84],[128,81],[124,80],[122,80],[120,78],[119,76],[116,78]],false,[]));
 
   provinces.push(new Province(findCountry("Lotharignia"),"Rhineland",[[124,80],[122,80],[120,78],[119,76],[117,75],[119,73],[117,69],[118,66],[117,64],[121,64],[123,69],[125,76]],true,['Aachen']));
+
+  people.push(new Human(22,86,103,'Louis',92,'Catholic','East Francian','East Francia',[],'King','East Francia'));
+
+  countries.push(new Country( 'rgb(150 150 150 / 100%)','East Francia', findPerson('rule', 'East Francia')));
+
+  provinces.push(new Province(findCountry('East Francia'),'Liechtenstein',[[129,96],[132,99],[133,96],[134,97],[136,97],[138,94],[135,93],[135,89],[124,89],[126,94]],false,[]));
+
+  provinces.push(new Province(findCountry('East Francia'),'Baden Württemburg',[[135,89],[124,89],[125,84],[128,81],[132,82],[133,83]],false,[]));
   
   try {deSel();} catch {}
 
@@ -535,4 +537,3 @@ function renderNodes() {
 newRun();
 setInterval(update, 250);
 setInterval(renderNodes, 250);
-
